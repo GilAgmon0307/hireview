@@ -739,10 +739,6 @@
 <nav>
   <span class="nav-logo">HireView</span>
   <div class="nav-right">
-    <div class="visitor-badge">
-      <span class="dot"></span>
-      <span><span id="visit-count">—</span> visitors</span>
-    </div>
     <button class="nav-cta" id="nav-join-btn">Get Early Access</button>
   </div>
 </nav>
@@ -1098,15 +1094,8 @@
      SCRIPTS
      ====================================================================== -->
 <script>
-  // ---- Visitor tracking ------------------------------------------------
-  fetch('/api/visit', { method: 'POST' })
-    .then(r => r.json())
-    .then(d => {
-      document.getElementById('visit-count').textContent = d.visits.toLocaleString();
-    })
-    .catch(() => {
-      document.getElementById('visit-count').textContent = '—';
-    });
+  // ---- Visitor tracking (silent — count stored server-side only) -------
+  fetch('/api/visit', { method: 'POST' }).catch(() => {});
 
   // ---- CTA tracking helper ---------------------------------------------
   function trackCta(button) {

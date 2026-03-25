@@ -62,10 +62,6 @@ app.post('/api/cta-click', (req, res) => {
   res.json({ ctaClicks: stats.ctaClicks });
 });
 
-app.get('/api/stats', (req, res) => {
-  res.json(readStats());
-});
-
 // ---------------------------------------------------------------------------
 // Admin dashboard (HTTP Basic Auth)
 // ---------------------------------------------------------------------------
@@ -84,8 +80,9 @@ app.get('/admin', (req, res) => {
   }
 
   const stats = readStats();
+  const joinClicks = stats.joinClicks || 0;
   const convRate = stats.visits > 0
-    ? ((stats.ctaClicks / stats.visits) * 100).toFixed(1)
+    ? ((joinClicks / stats.visits) * 100).toFixed(1)
     : '0.0';
 
   res.send(`<!DOCTYPE html>
@@ -158,19 +155,15 @@ app.get('/admin', (req, res) => {
 
     <div class="stat">
       <div>
-        <div class="stat-label">CTA Button Clicks</div>
-        <div class="sub-stats">
-          <span class="sub-stat">Join Now: ${stats.joinClicks || 0}</span>
-          <span class="sub-stat">Hear Details: ${stats.detailClicks || 0}</span>
-        </div>
+        <div class="stat-label">"Join Now" Button Clicks</div>
       </div>
-      <div class="stat-value purple">${stats.ctaClicks}</div>
+      <div class="stat-value purple">${joinClicks}</div>
     </div>
 
     <div class="stat">
       <div>
         <div class="stat-label">Conversion Rate</div>
-        <div class="sub-stats"><span class="sub-stat">clicks / visits</span></div>
+        <div class="sub-stats"><span class="sub-stat">Join Now clicks / visits</span></div>
       </div>
       <div class="stat-value blue">${convRate}%</div>
     </div>
