@@ -1,7 +1,7 @@
 {
-  "name": "hireview-landing",
-  "version": "1.0.0",
-  "description": "HireView landing page with visitor and CTA tracking",
+  "name": "hireview",
+  "version": "2.0.0",
+  "description": "HireView website with visitor tracking, contact forms, and analytics",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
