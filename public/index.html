@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HireView -- AI-Native Technical Interview Platform</title>
-  <meta name="description" content="HireView evaluates how engineers collaborate with AI. 11-criteria behavioral scoring, full session replay, and process intelligence for modern technical hiring." />
+  <title>HireView -- See How Engineers Actually Work</title>
+  <meta name="description" content="Take-home assignments show what candidates built. HireView shows you how they think -- process evaluation, AI collaboration analytics, and behavioral scoring for modern technical hiring." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -60,9 +60,6 @@
     }
     .nav-logo { font-weight: 800; font-size: 1.3rem; color: var(--text-primary); text-decoration: none; letter-spacing: -0.02em; }
     .nav-logo span { color: var(--blue); }
-    .nav-links { display: flex; gap: 1.8rem; align-items: center; }
-    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color .2s; }
-    .nav-links a:hover { color: var(--text-primary); }
     .btn {
       display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.3rem;
       border-radius: 8px; font-weight: 600; font-size: 0.85rem; text-decoration: none;
@@ -75,157 +72,109 @@
 
     /* HERO */
     .hero { padding: 8rem 0 5rem; text-align: center; }
-    .hero-eyebrow { font-size: 0.8rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
     .hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1.2rem; }
     .hero h1 .hl { background: linear-gradient(135deg, var(--blue) 0%, var(--emerald) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 680px; margin: 0 auto 2rem; line-height: 1.7; }
-    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
-    .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto; }
-    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; text-align: center; }
-    .stat-card .num { font-size: 1.8rem; font-weight: 800; line-height: 1.2; }
-    .stat-card .num.red { color: var(--red); }
-    .stat-card .num.blue { color: var(--blue); }
-    .stat-card .num.orange { color: var(--orange); }
-    .stat-card .num.emerald { color: var(--emerald); }
-    .stat-card .label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+    .hero-sub { font-size: 1.1rem; color: var(--text-secondary); max-width: 620px; margin: 0 auto 2rem; line-height: 1.7; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { font-size: 0.9rem; color: var(--text-muted); text-align: center; }
+    .hero-stat strong { color: var(--blue); font-weight: 700; }
 
-    /* SECTION */
-    .section-label { font-size: 0.75rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-    .section-heading { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+    /* GALLERY */
+    .gallery-section { padding: 1rem 0 3rem; text-align: center; }
+    .gallery-toggle { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.9rem; cursor: pointer; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); font-family: inherit; transition: border-color .2s, color .2s; }
+    .gallery-toggle:hover { border-color: rgba(59,130,246,0.4); color: var(--text-primary); }
+    .gallery-toggle .arrow { transition: transform .3s; display: inline-block; }
+    .gallery-toggle.open .arrow { transform: rotate(180deg); }
+    .gallery-content { display: none; margin-top: 2rem; }
+    .gallery-content.open { display: block; }
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .gallery-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .2s, transform .2s; cursor: pointer; }
+    .gallery-item:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-2px); }
+    .gallery-item img { width: 100%; display: block; }
+    .gallery-item .caption { padding: 1rem 1.2rem; }
+    .gallery-item .caption h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .gallery-item .caption p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.tall img { height: 100%; object-fit: cover; }
+    @media (max-width: 900px) { .gallery-grid { grid-template-columns: 1fr; } .gallery-item.tall { grid-row: span 1; } }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); align-items: center; justify-content: center; cursor: zoom-out; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 12px; box-shadow: 0 0 60px rgba(0,0,0,0.8); }
+    .lightbox-close { position: absolute; top: 1.2rem; right: 1.5rem; color: #fff; font-size: 2rem; cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); border: none; transition: background .2s; font-family: inherit; }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* SECTION COMMON */
+    .section-label { font-size: 1rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .section-heading { font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
     .section-sub { color: var(--text-secondary); font-size: 1rem; max-width: 650px; margin-bottom: 2.5rem; }
 
-    /* PROBLEM */
-    .problem { padding: 5rem 0; }
-    .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
-    .problem-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color .2s; }
-    .problem-card:hover { border-color: rgba(239,68,68,0.3); }
-    .problem-card .ic { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; margin-bottom: 0.8rem; font-weight: 700; }
-    .problem-card .ic.red { background: rgba(239,68,68,0.15); color: var(--red); }
-    .problem-card .ic.orange { background: rgba(249,115,22,0.15); color: var(--orange); }
-    .problem-card .ic.yellow { background: rgba(250,204,21,0.15); color: var(--yellow); }
-    .problem-card .ic.blue { background: rgba(59,130,246,0.15); color: var(--blue); }
-    .problem-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .problem-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
-    .problem-card .sh { font-weight: 700; color: var(--text-primary); }
-
-    /* SOLUTION */
-    .solution { padding: 5rem 0; }
-    .solution-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
-    .sol-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; transition: border-color .2s; }
-    .sol-card:hover { border-color: rgba(59,130,246,0.3); }
-    .sol-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.8rem; }
-    .sol-card ul { list-style: none; }
-    .sol-card li { font-size: 0.85rem; color: var(--text-secondary); padding: 0.35rem 0; padding-left: 1.2rem; position: relative; line-height: 1.5; }
-    .sol-card li::before { content: '\25B8'; position: absolute; left: 0; }
-    .sol-card.c-blue li::before { color: var(--blue); }
-    .sol-card.c-emerald li::before { color: var(--emerald); }
-    .sol-card.c-orange li::before { color: var(--orange); }
-
-    /* HOW */
+    /* HOW IT WORKS */
     .how { padding: 5rem 0; }
-    .how-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem; }
-    .step-card { text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1rem; }
-    .step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--gradient-btn); color: #fff; font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.8rem; }
-    .step-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; }
-    .step-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+    .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .step-card { text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem 1.5rem; transition: border-color .2s; }
+    .step-card:hover { border-color: rgba(59,130,246,0.3); }
+    .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--gradient-btn); color: #fff; font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+    .step-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .step-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
 
-    /* SCORING */
-    .scoring { padding: 5rem 0; }
-    .scoring-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
-    .cr-row { display: flex; align-items: center; gap: 0.8rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; }
-    .cr-badge { min-width: 42px; height: 28px; background: var(--blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: #fff; }
-    .cr-info h4 { font-size: 0.85rem; font-weight: 600; }
-    .cr-info p { font-size: 0.7rem; color: var(--text-muted); }
-
-    /* COMPARISON */
-    .comparison { padding: 5rem 0; }
-    .comp-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
-    .comp-table th { padding: 0.8rem 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); text-align: left; border-bottom: 1px solid var(--border); font-weight: 600; }
-    .comp-table td { padding: 0.7rem 1rem; font-size: 0.8rem; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
-    .comp-table tr:last-child td { border-bottom: none; }
-    .comp-table .ck { color: var(--emerald); font-weight: 700; }
-    .comp-table .pa { color: var(--yellow); font-weight: 600; }
-    .comp-table .no { color: var(--text-muted); }
-    .comp-table .hv { background: rgba(59,130,246,0.06); }
-    .comp-table .hv.hd { color: var(--blue); font-weight: 700; }
-
-    /* WHY NOW */
-    .whynow { padding: 5rem 0; }
-    .wn-list { display: flex; flex-direction: column; gap: 0.8rem; }
-    .wn-item { display: flex; gap: 1rem; align-items: flex-start; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem; }
-    .wn-dot { min-width: 8px; height: 8px; border-radius: 50%; background: var(--blue); margin-top: 0.5rem; }
-    .wn-item h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.15rem; }
-    .wn-item p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
-
-    /* PRICING */
-    .pricing { padding: 5rem 0; }
-    .pricing-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
-    .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; text-align: center; transition: border-color .2s; }
-    .price-card:hover { border-color: rgba(59,130,246,0.3); }
-    .price-card.ft { border-color: var(--blue); background: rgba(59,130,246,0.05); }
-    .price-card .tier { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.3rem; }
-    .price-card .price { font-size: 2.5rem; font-weight: 800; color: var(--text-primary); }
-    .price-card .period { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-    .price-card .ann { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem; }
-    .price-card .feat { font-size: 0.8rem; color: var(--text-secondary); padding: 0.4rem 0; border-top: 1px solid var(--border); }
-    .price-card .feat:first-of-type { border-top: none; }
-    .price-card .feat strong { color: var(--text-primary); }
-
-    /* CONTACT */
-    .contact { padding: 5rem 0; }
-    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .cfb { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; }
-    .cfb h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .cfb .sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
-    .fr { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem; }
-    .fr.full { grid-template-columns: 1fr; }
-    .ff label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.3rem; }
-    .ff input, .ff select, .ff textarea {
-      width: 100%; padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03); color: var(--text-primary); font-family: inherit;
-      font-size: 0.85rem; outline: none; transition: border-color .2s;
-    }
-    .ff input:focus, .ff select:focus, .ff textarea:focus { border-color: var(--blue); }
-    .ff textarea { resize: vertical; min-height: 80px; }
-    .ff select option { background: #1a1a2e; }
-    .fsub { margin-top: 1rem; }
-    .fok { display: none; text-align: center; padding: 2rem; }
-    .fok h3 { color: var(--emerald); font-size: 1.1rem; margin-bottom: 0.3rem; }
-    .fok p { color: var(--text-muted); font-size: 0.85rem; }
-
-    .cd { display: flex; flex-direction: column; gap: 1rem; }
-    .dc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color .2s; }
-    .dc:hover { border-color: rgba(59,130,246,0.3); }
-    .dc h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
-    .dc p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.5; }
-    .dc a { color: var(--blue); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-    .dc a:hover { text-decoration: underline; }
+    /* WHAT WE MEASURE */
+    .measure { padding: 5rem 0; }
+    .measure-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .measure-card { display: flex; align-items: flex-start; gap: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; transition: border-color .2s; }
+    .measure-card:hover { border-color: rgba(59,130,246,0.3); }
+    .measure-dot { min-width: 10px; height: 10px; border-radius: 50%; margin-top: 0.45rem; }
+    .measure-dot.blue { background: var(--blue); }
+    .measure-dot.emerald { background: var(--emerald); }
+    .measure-dot.orange { background: var(--orange); }
+    .measure-dot.yellow { background: var(--yellow); }
+    .measure-more { text-align: center; margin-top: 1.2rem; font-size: 0.85rem; color: var(--text-muted); }
+    .measure-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .measure-card p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
 
     /* CTA BANNER */
     .cta-banner { padding: 4rem 0; text-align: center; }
     .cta-inner { background: linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(8,145,178,0.1) 100%); border: 1px solid rgba(59,130,246,0.2); border-radius: 20px; padding: 3rem 2rem; }
     .cta-inner h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; margin-bottom: 0.6rem; letter-spacing: -0.02em; }
     .cta-inner p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
-    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .email-form { max-width: 480px; margin: 0 auto; }
+    .email-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .email-form input, .email-form textarea {
+      width: 100%; padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05); color: var(--text-primary); font-family: inherit;
+      font-size: 0.9rem; outline: none; transition: border-color .2s;
+    }
+    .email-row input { flex: 1; min-width: 220px; }
+    .email-form textarea { margin-top: 0.6rem; resize: vertical; min-height: 60px; }
+    .email-form input:focus, .email-form textarea:focus { border-color: var(--blue); }
+    .email-form input::placeholder, .email-form textarea::placeholder { color: var(--text-muted); }
+    .email-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.8rem; }
+
+    /* CONTACT OPTIONS */
+    .contact-options { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .contact-opt { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.85rem; text-decoration: none; transition: color .2s; }
+    .contact-opt:hover { color: var(--text-primary); }
+    .contact-opt svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .fok { display: none; text-align: center; padding: 1rem; }
+    .fok h3 { color: var(--emerald); font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .fok p { color: var(--text-muted); font-size: 0.85rem; }
 
     footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-muted); position: relative; z-index: 1; }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
 
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
-      .hero-stats { grid-template-columns: repeat(2, 1fr); }
-      .solution-cols, .pricing-cols { grid-template-columns: 1fr; }
-      .how-steps { grid-template-columns: repeat(3, 1fr); }
-      .scoring-grid { grid-template-columns: 1fr; }
-      .contact-layout { grid-template-columns: 1fr; }
-      .problem-grid { grid-template-columns: 1fr; }
+      .how-steps { grid-template-columns: 1fr; }
+      .measure-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
-      .nav-links a:not(.btn) { display: none; }
-      .hero-stats { grid-template-columns: 1fr 1fr; }
-      .how-steps { grid-template-columns: 1fr; }
-      .fr { grid-template-columns: 1fr; }
+      .email-row { flex-direction: column; }
+      .email-row input { min-width: unset; }
+      .contact-options { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -238,109 +187,21 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Hire<span>View</span></a>
-  <div class="nav-links">
-    <a href="#problem">Problem</a>
-    <a href="#solution">Solution</a>
-    <a href="#scoring">Scoring</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#contact" class="btn btn-primary" data-track="nav_get_early_access">Get Early Access</a>
-  </div>
+  <a href="#early-access" class="btn btn-primary" data-track="nav_get_early_access">Get Early Access</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <p class="hero-eyebrow">AI-Native Technical Interview Platform</p>
-    <h1>Stop Guessing.<br>Start <span class="hl">Seeing How Engineers Work</span>.</h1>
-    <p class="hero-sub">
-      HireView captures the full engineering workflow -- every keystroke, AI prompt, debugging cycle,
-      and decision -- then scores it across 11 behavioral criteria. You see the process, not just the output.
+    <h1 class="fade-up">Take-home assignments show what candidates built.<br><span class="hl">Not how they think.</span></h1>
+    <p class="hero-sub fade-up">
+      Watch exactly how candidates plan, prompt AI, debug, and iterate -- then get an automated
+      score you can compare across candidates. Built for engineering teams hiring developers.
     </p>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn btn-primary btn-lg" data-track="hero_request_access">Request Early Access</a>
-      <a href="#how" class="btn btn-secondary btn-lg" data-track="hero_see_how">See How It Works</a>
+    <div class="hero-ctas fade-up">
+      <a href="#early-access" class="btn btn-primary btn-lg" data-track="hero_get_early_access">Get Early Access</a>
     </div>
-    <div class="hero-stats fade-up">
-      <div class="stat-card"><div class="num red">35%</div><div class="label">of candidates caught cheating on technical assessments (Dec 2025)</div></div>
-      <div class="stat-card"><div class="num blue">84%</div><div class="label">of developers already use AI coding tools daily</div></div>
-      <div class="stat-card"><div class="num orange">58 days</div><div class="label">average time to hire a software engineer</div></div>
-      <div class="stat-card"><div class="num emerald">$17K</div><div class="label">average cost of a single bad hire</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROBLEM -->
-<section class="problem" id="problem">
-  <div class="container">
-    <p class="section-label fade-up">The Problem</p>
-    <h2 class="section-heading fade-up">Technical hiring was built for a world without AI</h2>
-    <p class="section-sub fade-up">Candidates code with AI every day. But interviews still evaluate them as if they work alone. The result: broken signal, rampant cheating, and costly bad hires.</p>
-    <div class="problem-grid">
-      <div class="problem-card fade-up">
-        <div class="ic red">!</div>
-        <h3>Cheating has doubled</h3>
-        <p>Cheating rates jumped from <span class="sh">15% to 35%</span> in just 6 months across 50,000+ candidates. Tools like Interview Coder and LockedIn AI have <span class="sh">$2M+ ARR</span> helping candidates beat your tests. 61% of cheaters go undetected.</p>
-      </div>
-      <div class="problem-card fade-up">
-        <div class="ic orange">$</div>
-        <h3>Bad hires are expensive</h3>
-        <p>Every bad hire costs an average of <span class="sh">$17,000</span>. With a <span class="sh">21:1 interview-to-hire ratio</span> for software engineering, companies screen thousands to fill a single role -- and still get it wrong.</p>
-      </div>
-      <div class="problem-card fade-up">
-        <div class="ic yellow">?</div>
-        <h3>AI is invisible in current tools</h3>
-        <p><span class="sh">59% of hiring managers</span> lack visibility into how candidates use AI. Current platforms capture the output but miss the process: Did they plan? Did they debug systematically? Did they validate AI suggestions?</p>
-      </div>
-      <div class="problem-card fade-up">
-        <div class="ic blue">~</div>
-        <h3>Output does not predict performance</h3>
-        <p>A correct solution tells you nothing about how someone works day-to-day. <span class="sh">72% of engineering leaders</span> say AI creates new evaluation challenges. Algorithm recall does not correlate with on-the-job performance.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUTION -->
-<section class="solution" id="solution">
-  <div class="container">
-    <p class="section-label fade-up">The Solution</p>
-    <h2 class="section-heading fade-up">A platform built to evaluate how engineers actually work</h2>
-    <p class="section-sub fade-up">HireView gives candidates a real coding environment with AI assistance -- then captures and scores their entire workflow.</p>
-    <div class="solution-cols">
-      <div class="sol-card c-blue fade-up">
-        <h3 style="color:var(--blue)">For Recruiters</h3>
-        <ul>
-          <li>Create assignments or use AI-generated tasks tailored to role and stack</li>
-          <li>11-criteria AI evaluation with scores from 0 to 100</li>
-          <li>Full session replay: timeline scrubber, file state at any point, chat log</li>
-          <li>Candidate comparison and percentile ranking across assignments</li>
-          <li>Suggested follow-up interview questions from session data</li>
-          <li>Group messaging with candidate and interviewer per assignment</li>
-        </ul>
-      </div>
-      <div class="sol-card c-emerald fade-up">
-        <h3 style="color:var(--emerald)">For Candidates</h3>
-        <ul>
-          <li>Browser-based IDE (Monaco / VS Code engine) with multi-file support</li>
-          <li>Built-in AI chat: Ask, Plan, and Agent modes</li>
-          <li>Multi-language code execution: Python, TypeScript, JavaScript, C</li>
-          <li>Auto-save, keyboard shortcuts (Ctrl+S, Ctrl+Enter), file explorer</li>
-          <li>Session timer with countdown, progress bar, and time warnings</li>
-          <li>Or work locally with Claude Code and upload results</li>
-        </ul>
-      </div>
-      <div class="sol-card c-orange fade-up">
-        <h3 style="color:var(--orange)">For Interviewers</h3>
-        <ul>
-          <li>Assigned per-candidate by the recruiter for access control</li>
-          <li>Watch full session replay after the candidate completes</li>
-          <li>Submit independent evaluation (1-5 rating + written notes)</li>
-          <li>Access group messaging thread with recruiter and candidate</li>
-          <li>Create and manage assignments, browse benchmark library</li>
-          <li>See AI evaluation alongside your own for calibration</li>
-        </ul>
-      </div>
-    </div>
+    <p class="hero-stat fade-up"><strong>84% of developers</strong> now use AI tools in their workflow (<a href="https://survey.stackoverflow.co/2025/ai" target="_blank" rel="noopener" style="color:var(--blue)">Stack Overflow, 2025</a>). Your interviews should reflect that.</p>
   </div>
 </section>
 
@@ -348,177 +209,163 @@
 <section class="how" id="how">
   <div class="container">
     <p class="section-label fade-up">How It Works</p>
-    <h2 class="section-heading fade-up">Five steps from assignment to hiring decision</h2>
-    <p class="section-sub fade-up">End-to-end workflow that captures real engineering behavior.</p>
-    <div class="how-steps fade-up">
-      <div class="step-card"><div class="step-num">1</div><h4>Create</h4><p>Write a custom assignment, use the AI generator, or clone from the benchmark library</p></div>
-      <div class="step-card"><div class="step-num">2</div><h4>Invite</h4><p>Send invites by email. Configure AI access, time limits, deadlines per candidate</p></div>
-      <div class="step-card"><div class="step-num">3</div><h4>Code</h4><p>Candidate works in the browser IDE with AI. Every action is captured as an immutable event</p></div>
-      <div class="step-card"><div class="step-num">4</div><h4>Evaluate</h4><p>AI scores the session across 11 criteria. Summary, highlights, and follow-up questions generated</p></div>
-      <div class="step-card"><div class="step-num">5</div><h4>Decide</h4><p>Replay the session, compare candidates, read interviewer evaluations, make an informed hire</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- AI SCORING -->
-<section class="scoring" id="scoring">
-  <div class="container">
-    <p class="section-label fade-up">AI Evaluation</p>
-    <h2 class="section-heading fade-up">11 behavioral criteria. Scored 0 to 100.</h2>
-    <p class="section-sub fade-up">We do not just score the code. We score the process: how the candidate plans, iterates, debugs, tests, and collaborates with AI. Every score is traceable to specific session events.</p>
-    <div class="scoring-grid fade-up">
-      <div class="cr-row"><div class="cr-badge">15%</div><div class="cr-info"><h4>Code Robustness</h4><p>Edge cases, error handling, boundary conditions</p></div></div>
-      <div class="cr-row"><div class="cr-badge">12%</div><div class="cr-info"><h4>Debugging Ability</h4><p>Systematic error identification, hypothesis-driven investigation</p></div></div>
-      <div class="cr-row"><div class="cr-badge">10%</div><div class="cr-info"><h4>Planning Before Implementation</h4><p>Pseudocode, structured setup, clarifying prompts before coding</p></div></div>
-      <div class="cr-row"><div class="cr-badge">10%</div><div class="cr-info"><h4>Code Organization</h4><p>Readability, naming, structure, modularity, maintainability</p></div></div>
-      <div class="cr-row"><div class="cr-badge">10%</div><div class="cr-info"><h4>Independence from AI</h4><p>Self-reliance ratio: reasoning and code produced without AI help</p></div></div>
-      <div class="cr-row"><div class="cr-badge">8%</div><div class="cr-info"><h4>Step-by-Step Work</h4><p>Incremental progress vs. big-bang implementation</p></div></div>
-      <div class="cr-row"><div class="cr-badge">8%</div><div class="cr-info"><h4>Writing Tests</h4><p>Test files written, edge cases verified, output validated</p></div></div>
-      <div class="cr-row"><div class="cr-badge">8%</div><div class="cr-info"><h4>Validation of AI Outputs</h4><p>Critical review of AI suggestions before adoption</p></div></div>
-      <div class="cr-row"><div class="cr-badge">7%</div><div class="cr-info"><h4>AI Tool Selection</h4><p>Strategic use of Ask, Plan, and Agent modes</p></div></div>
-      <div class="cr-row"><div class="cr-badge">7%</div><div class="cr-info"><h4>Iteration Quality</h4><p>Prompt refinement and approach improvement over the session</p></div></div>
-      <div class="cr-row"><div class="cr-badge">5%</div><div class="cr-info"><h4>Token Efficiency</h4><p>Focused, specific prompts with low noise-to-output ratio</p></div></div>
-    </div>
-    <p class="fade-up" style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:var(--text-muted)">
-      Scoring is blind by design -- no demographic data is collected. AI evaluation uses only session events and code content.
-      Quarterly bias audits via statistical parity analysis in compliance with EEOC guidelines and EU AI Act Article 9.
-    </p>
-  </div>
-</section>
-
-<!-- COMPARISON -->
-<section class="comparison" id="comparison">
-  <div class="container">
-    <p class="section-label fade-up">Competitive Landscape</p>
-    <h2 class="section-heading fade-up">What incumbents lack</h2>
-    <p class="section-sub fade-up">HackerRank, CodeSignal, and Codility all added AI features in 2025 -- but none were built AI-first. HireView is the only platform with deep behavioral process scoring at startup-friendly pricing.</p>
-    <div class="fade-up" style="overflow-x:auto">
-    <table class="comp-table">
-      <thead><tr><th>Feature</th><th class="hv hd">HireView</th><th>HackerRank</th><th>CodeSignal</th><th>CoderPad</th><th>Codility</th></tr></thead>
-      <tbody>
-        <tr><td>AI-native architecture</td><td class="hv ck">Yes</td><td class="pa">Partial</td><td class="pa">Partial</td><td class="pa">Partial</td><td class="no">Limited</td></tr>
-        <tr><td>Process-first evaluation</td><td class="hv ck">Core</td><td class="pa">Add-on</td><td class="pa">Add-on</td><td class="pa">Partial</td><td class="no">Limited</td></tr>
-        <tr><td>Behavioral scoring criteria</td><td class="hv ck">11 criteria</td><td class="pa">Yes</td><td class="pa">Partial</td><td class="no">Limited</td><td class="no">Limited</td></tr>
-        <tr><td>AI-to-AI evaluation</td><td class="hv ck">Yes</td><td class="pa">Partial</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
-        <tr><td>Full session replay</td><td class="hv ck">Yes</td><td class="ck">Yes</td><td class="ck">Yes</td><td class="ck">Yes</td><td class="pa">Partial</td></tr>
-        <tr><td>Group messaging</td><td class="hv ck">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
-        <tr><td>Interviewer independent eval</td><td class="hv ck">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
-        <tr><td>Entry price</td><td class="hv" style="color:var(--emerald);font-weight:600">$149/mo</td><td>$165/mo</td><td>Custom</td><td>$100/mo</td><td>$1,200/yr</td></tr>
-        <tr><td>Free trial</td><td class="hv ck">14 days</td><td class="pa">Limited</td><td class="no">No</td><td class="ck">Yes</td><td class="no">No</td></tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
-</section>
-
-<!-- WHY NOW -->
-<section class="whynow" id="whynow">
-  <div class="container">
-    <p class="section-label fade-up">Why Now</p>
-    <h2 class="section-heading fade-up">The market is ready for a new approach</h2>
-    <div class="wn-list">
-      <div class="wn-item fade-up"><div class="wn-dot"></div><div><h4>Meta is redesigning interviews around AI</h4><p>As of October 2025, Meta is replacing one of two coding rounds with an AI-enabled format. This validates the entire category and signals a shift across FAANG.</p></div></div>
-      <div class="wn-item fade-up"><div class="wn-dot" style="background:var(--emerald)"></div><div><h4>AI tools are table stakes for developers</h4><p>GitHub Copilot has 4.7M paid subscribers and is used by 90% of Fortune 100. Cursor raised at $29.3B valuation. 46% of all code on GitHub is now AI-generated.</p></div></div>
-      <div class="wn-item fade-up"><div class="wn-dot" style="background:var(--red)"></div><div><h4>Cheating tools are a $2M+ business</h4><p>Interview Coder raised a $5.3M seed round in April 2025. LeetCode Wizard claims 93% pass rate in FAANG interviews. Candidates are investing real money to beat current systems.</p></div></div>
-      <div class="wn-item fade-up"><div class="wn-dot" style="background:var(--orange)"></div><div><h4>EU AI Act compliance deadline: August 2, 2026</h4><p>AI used in hiring is classified as high-risk. Companies need explainable, auditable AI evaluation. HireView's event sourcing architecture provides a tamper-proof audit trail by design.</p></div></div>
-      <div class="wn-item fade-up"><div class="wn-dot" style="background:var(--yellow)"></div><div><h4>Every incumbent bolted on AI in 2025</h4><p>HackerRank, CodeSignal, Codility, and CoderPad all launched AI features. But none were architectured for process evaluation. The differentiation window for an AI-native platform is now.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="container">
-    <p class="section-label fade-up">Pricing</p>
-    <h2 class="section-heading fade-up">Start small. Scale as you grow.</h2>
-    <p class="section-sub fade-up">No long-term contracts. 14-day free trial with 5 assessments. No credit card required.</p>
-    <div class="pricing-cols fade-up">
-      <div class="price-card">
-        <div class="tier">Starter</div><div class="price">$149</div><div class="period">/ month</div><div class="ann">$1,490 billed annually</div>
-        <div class="feat"><strong>10</strong> assessments per month</div>
-        <div class="feat">AI evaluation with 11 criteria</div>
-        <div class="feat">Session replay and timeline</div>
-        <div class="feat">1 recruiter seat</div>
-        <div class="feat">Email support</div>
-        <a href="#contact" class="btn btn-secondary" style="margin-top:1rem;width:100%;justify-content:center" data-track="pricing_starter">Get Started</a>
+    <h2 class="section-heading fade-up">Three steps to a better hiring signal</h2>
+    <div class="how-steps">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <h4>Send a link</h4>
+        <p>Create an assignment and invite your candidate. Set time limits, choose AI access levels, and go.</p>
       </div>
-      <div class="price-card ft">
-        <div class="tier" style="color:var(--blue)">Growth</div><div class="price">$399</div><div class="period">/ month</div><div class="ann">$3,990 billed annually</div>
-        <div class="feat"><strong>50</strong> assessments per month</div>
-        <div class="feat">Everything in Starter</div>
-        <div class="feat">Candidate comparison and ranking</div>
-        <div class="feat">Interviewer independent evaluations</div>
-        <div class="feat">Up to 5 recruiter seats</div>
-        <div class="feat">Priority support</div>
-        <a href="#contact" class="btn btn-primary" style="margin-top:1rem;width:100%;justify-content:center" data-track="pricing_growth">Get Started</a>
+      <div class="step-card fade-up">
+        <div class="step-num">2</div>
+        <h4>Candidate works with AI</h4>
+        <p>They code in a browser IDE with a built-in AI assistant. Every interaction, edit, and decision is captured.</p>
       </div>
-      <div class="price-card">
-        <div class="tier">Enterprise</div><div class="price">Custom</div><div class="period">&nbsp;</div><div class="ann">Starting at $12,000/year</div>
-        <div class="feat"><strong>Unlimited</strong> assessments</div>
-        <div class="feat">Everything in Growth</div>
-        <div class="feat">SSO (SAML / OAuth)</div>
-        <div class="feat">ATS integrations (Greenhouse, Lever)</div>
-        <div class="feat">Custom branding</div>
-        <div class="feat">Dedicated account manager</div>
-        <a href="#contact" class="btn btn-secondary" style="margin-top:1rem;width:100%;justify-content:center" data-track="pricing_enterprise">Contact Sales</a>
+      <div class="step-card fade-up">
+        <div class="step-num">3</div>
+        <h4>You get a process report</h4>
+        <p>AI-generated evaluation of how they worked -- not just what they submitted. Full session replay included.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<section class="cta-banner">
+<!-- WHAT WE MEASURE -->
+<section class="measure">
+  <div class="container">
+    <p class="section-label fade-up">What We Measure</p>
+    <h2 class="section-heading fade-up">Know who's actually good -- before the first interview</h2>
+    <p class="section-sub fade-up">Every session is automatically scored on behavioral criteria that predict real on-the-job performance.</p>
+    <div class="measure-grid">
+      <div class="measure-card fade-up">
+        <div class="measure-dot blue"></div>
+        <div>
+          <h4>Planning before implementation</h4>
+          <p>Do they think before they code? Pseudocode, structured setup, clarifying questions.</p>
+        </div>
+      </div>
+      <div class="measure-card fade-up">
+        <div class="measure-dot orange"></div>
+        <div>
+          <h4>Debugging approach</h4>
+          <p>Systematic error identification and hypothesis-driven investigation, not random trial and error.</p>
+        </div>
+      </div>
+      <div class="measure-card fade-up">
+        <div class="measure-dot emerald"></div>
+        <div>
+          <h4>AI collaboration quality</h4>
+          <p>How they prompt, validate, and iterate on AI suggestions -- not just whether they used AI.</p>
+        </div>
+      </div>
+      <div class="measure-card fade-up">
+        <div class="measure-dot yellow"></div>
+        <div>
+          <h4>Code robustness</h4>
+          <p>Edge cases, error handling, testing, and boundary conditions in the final output.</p>
+        </div>
+      </div>
+    </div>
+    <p class="measure-more fade-up">These are just a few of the many criteria we evaluate across every session.</p>
+    <p class="measure-more fade-up" style="margin-top:0.6rem">Existing platforms capture the output. <strong style="color:var(--text-primary)">We capture the process.</strong></p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="container">
+    <button class="gallery-toggle fade-up" id="gallery-btn" onclick="toggleGallery()" data-track="gallery_toggle">
+      <span class="arrow">&#9660;</span> See the Platform
+    </button>
+    <div class="gallery-content" id="gallery">
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="/images/candidate-ide.png" alt="Candidate browser IDE with AI assistant" loading="lazy" />
+          <div class="caption">
+            <h4>Candidate Workspace</h4>
+            <p>A browser-based IDE with instructions, multi-file editor, code execution, and a built-in AI assistant with Ask, Plan, and Agent modes.</p>
+          </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="/images/session-replay.png" alt="Session replay with timeline and AI chat log" loading="lazy" />
+          <div class="caption">
+            <h4>Session Replay</h4>
+            <p>Recruiters scrub through the full event timeline, see every file change, AI conversation, and code execution in chronological order.</p>
+          </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="/images/evaluation.png" alt="AI evaluation with scores and criteria" loading="lazy" />
+          <div class="caption">
+            <h4>AI Evaluation Report</h4>
+            <p>Automated scoring across 10 behavioral criteria, prompt analysis, a written summary, and suggested follow-up interview questions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<!-- CTA + EMAIL CAPTURE -->
+<section class="cta-banner" id="early-access">
   <div class="container">
     <div class="cta-inner fade-up">
-      <h2>Ready to hire for the way engineers actually work?</h2>
-      <p>Join the early access program and be among the first to evaluate AI collaboration, not just code output.</p>
-      <div class="cta-btns">
-        <a href="#contact" class="btn btn-primary btn-lg" data-track="cta_request_access">Request Early Access</a>
-        <a href="mailto:GilAgmon3@gmail.com?subject=HireView%20-%20Interested%20in%20learning%20more" class="btn btn-secondary btn-lg" data-track="cta_email_direct">Email Us Directly</a>
+      <h2>Be the first to try a better way to evaluate engineers</h2>
+      <p>We're opening early access to the first 50 companies. We'll reach out when your spot is ready.</p>
+      <div id="cfc">
+        <form id="cf" class="email-form" autocomplete="on">
+          <div class="email-row">
+            <input type="email" name="email" required placeholder="you@company.com" />
+            <button type="submit" class="btn btn-primary btn-lg" data-track="cta_get_early_access">Get Early Access</button>
+          </div>
+          <textarea name="message" placeholder="Anything you'd like to tell us? (optional)"></textarea>
+        </form>
+        <p class="email-note">No spam. We'll only email you about early access.</p>
+      </div>
+      <div class="fok" id="fok">
+        <h3>You're on the list</h3>
+        <p>We'll reach out when your spot is ready. In the meantime, reach us at <a href="mailto:GilAgmon3@gmail.com" style="color:var(--blue)">GilAgmon3@gmail.com</a></p>
+      </div>
+      <div class="contact-options">
+        <a href="mailto:GilAgmon3@gmail.com?subject=HireView%20-%20Question" class="contact-opt" data-track="contact_email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          GilAgmon3@gmail.com
+        </a>
+        <a href="https://wa.me/972509030798?text=Hi%2C%20I'm%20interested%20in%20HireView" target="_blank" rel="noopener" class="contact-opt" data-track="contact_whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="container">
-    <p class="section-label fade-up">Get in Touch</p>
-    <h2 class="section-heading fade-up">Let's talk about your hiring workflow</h2>
-    <p class="section-sub fade-up">Leave your details and we will reach out within 24 hours. Or contact us directly.</p>
-    <div class="contact-layout">
-      <div class="cfb fade-up">
-        <div id="cfc">
-          <h3>Request early access</h3>
-          <p class="sub">Fill in your details and we will get back to you.</p>
-          <form id="cf" autocomplete="on">
-            <div class="fr"><div class="ff"><label for="cn">Full name *</label><input type="text" id="cn" name="name" required placeholder="Jane Smith" /></div><div class="ff"><label for="ce">Work email *</label><input type="email" id="ce" name="email" required placeholder="jane@company.com" /></div></div>
-            <div class="fr"><div class="ff"><label for="cc">Company</label><input type="text" id="cc" name="company" placeholder="Acme Inc." /></div><div class="ff"><label for="cr">Your role</label><select id="cr" name="role"><option value="">Select...</option><option value="Engineering Manager">Engineering Manager</option><option value="VP Engineering">VP Engineering / CTO</option><option value="Technical Recruiter">Technical Recruiter</option><option value="Talent Acquisition">Talent Acquisition Lead</option><option value="HR Director">HR Director</option><option value="Founder">Founder / CEO</option><option value="Other">Other</option></select></div></div>
-            <div class="fr"><div class="ff"><label for="cs">Engineering team size</label><select id="cs" name="teamSize"><option value="">Select...</option><option value="1-10">1-10 engineers</option><option value="11-50">11-50 engineers</option><option value="51-200">51-200 engineers</option><option value="201-500">201-500 engineers</option><option value="500+">500+ engineers</option></select></div></div>
-            <div class="fr full"><div class="ff"><label for="cm">What are your biggest technical hiring challenges?</label><textarea id="cm" name="message" placeholder="Optional -- tell us what you are struggling with..."></textarea></div></div>
-            <div class="fsub"><button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center" data-track="form_submit">Submit Request</button></div>
-          </form>
-        </div>
-        <div class="fok" id="fok">
-          <h3>Thank you</h3>
-          <p>We received your request and will reach out within 24 hours.</p>
-          <p style="margin-top:1rem;color:var(--text-secondary)">In the meantime, feel free to email us directly at <a href="mailto:GilAgmon3@gmail.com" style="color:var(--blue)">GilAgmon3@gmail.com</a></p>
-        </div>
-      </div>
-      <div class="cd fade-up">
-        <div class="dc"><h4>Email us</h4><p>For questions, partnerships, or demo requests.</p><a href="mailto:GilAgmon3@gmail.com?subject=HireView%20-%20Question" data-track="contact_email">GilAgmon3@gmail.com</a></div>
-        <div class="dc"><h4>Call or WhatsApp</h4><p>Prefer to talk? We are available during business hours (Israel, GMT+2).</p><a href="tel:+972509030798" data-track="contact_phone">+972-50-903-0798</a></div>
-        <div class="dc"><h4>Schedule a demo</h4><p>See HireView in action. We will walk you through a live session with real AI evaluation.</p><a href="mailto:GilAgmon3@gmail.com?subject=HireView%20-%20Demo%20Request&body=Hi%2C%20I'd%20like%20to%20schedule%20a%20demo%20of%20HireView.%0A%0ACompany%3A%20%0ATeam%20size%3A%20%0APreferred%20time%3A%20" data-track="contact_demo">Request a Demo</a></div>
-        <div class="dc" style="border-color:rgba(59,130,246,0.2);background:rgba(59,130,246,0.04)"><h4>Design partner program</h4><p>We are looking for 10 design partners to shape the product. Get free access, direct influence on features, and priority support.</p><a href="mailto:GilAgmon3@gmail.com?subject=HireView%20-%20Design%20Partner%20Interest" data-track="contact_design_partner">Apply as Design Partner</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer><p>&copy; 2026 HireView. All rights reserved.</p></footer>
+<footer>
+  <p>&copy; 2026 HireView. All rights reserved. &nbsp;|&nbsp; <a href="mailto:GilAgmon3@gmail.com">GilAgmon3@gmail.com</a></p>
+</footer>
 
 <script>
-  fetch('/api/visit', { method: 'POST' }).catch(() => {});
+  let visitId = null;
+  const startTime = Date.now();
+
+  fetch('/api/visit', { method: 'POST' })
+    .then(r => r.json())
+    .then(d => { visitId = d.id; })
+    .catch(() => {});
+
+  function sendDuration() {
+    if (!visitId) return;
+    const seconds = Math.round((Date.now() - startTime) / 1000);
+    const blob = new Blob([JSON.stringify({ id: visitId, duration: seconds })], { type: 'application/json' });
+    navigator.sendBeacon('/api/visit-end', blob);
+  }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sendDuration(); });
+  window.addEventListener('beforeunload', sendDuration);
 
   document.addEventListener('click', (e) => {
     const t = e.target.closest('[data-track]');
@@ -536,11 +383,7 @@
     e.preventDefault();
     const f = e.target;
     const data = {
-      name: f.name.value.trim(),
       email: f.email.value.trim(),
-      company: f.company.value.trim(),
-      role: f.role.value,
-      teamSize: f.teamSize.value,
       message: f.message.value.trim(),
       source: 'early_access_form',
     };
@@ -561,6 +404,26 @@
     entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach((el) => obs.observe(el));
+
+  function toggleGallery() {
+    const content = document.getElementById('gallery');
+    const btn = document.getElementById('gallery-btn');
+    content.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.querySelector('.arrow').innerHTML = content.classList.contains('open') ? '&#9650;' : '&#9660;';
+  }
+
+  function openLightbox(wrap) {
+    const img = wrap.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 </script>
 </body>
 </html>
